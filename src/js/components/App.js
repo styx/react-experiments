@@ -3,6 +3,7 @@
 import React from 'react';
 import FilterLink from './FilterLink';
 import TodoList from './TodoList';
+import AddTodo from './AddTodo';
 
 let nextTodoId = 0;
 
@@ -24,6 +25,14 @@ export default class App extends React.Component {
     }
   }
 
+  onAddTodo(value) {
+    this.props.store.dispatch({
+      type: 'ADD_TODO',
+      text: value,
+      id: nextTodoId++
+    });
+  }
+
   onTodoClick(id) {
     this.props.store.dispatch({
       type: 'TOGGLE_TODO',
@@ -42,19 +51,7 @@ export default class App extends React.Component {
       <div>
         <h1>Hello Redux</h1>
 
-        <input ref={node => {
-          this.input = node;
-        }} />
-        <button onClick={() => {
-          store.dispatch({
-            type: 'ADD_TODO',
-            text: this.input.value,
-            id: nextTodoId++
-          });
-          this.input.value = '';
-        }}>
-          Add Todo
-        </button>
+        <AddTodo onClick={this.onAddTodo.bind(this)} />
 
         <TodoList todos={todos} onTodoClick={this.onTodoClick.bind(this)}/>
 

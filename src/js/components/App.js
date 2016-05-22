@@ -2,6 +2,7 @@
 
 import React from 'react';
 import FilterLink from './FilterLink';
+import TodoList from './TodoList';
 
 let nextTodoId = 0;
 
@@ -21,6 +22,13 @@ export default class App extends React.Component {
       default:
         return todos;
     }
+  }
+
+  onTodoClick(id) {
+    this.props.store.dispatch({
+      type: 'TOGGLE_TODO',
+      id: id
+    });
   }
 
   render() {
@@ -48,36 +56,19 @@ export default class App extends React.Component {
           Add Todo
         </button>
 
-        <ul>
-          {todos.map(todo =>
-            <li key={todo.id} onClick={() => {
-              store.dispatch({
-                type: 'TOGGLE_TODO',
-                id: todo.id
-              });
-            }}
-            style={{
-              textDecoration:
-                todo.completed ?
-                  'line-through' :
-                  'none'
-            }}
-            >
-              {todo.text}
-            </li>
-          )}
-        </ul>
+        <TodoList todos={todos} onTodoClick={this.onTodoClick.bind(this)}/>
+
         <p>
           Show:
           {' '}
           <FilterLink store={store} filter='SHOW_ALL'>
             All
           </FilterLink>
-          {' '}
+          {', '}
           <FilterLink store={store} filter='SHOW_ACTIVE'>
             Active
           </FilterLink>
-          {' '}
+          {', '}
           <FilterLink store={store} filter='SHOW_COMPLETED'>
             Completed
           </FilterLink>

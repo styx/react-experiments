@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react';
+import FilterLink from './FilterLink';
 
 let nextTodoId = 0;
 
@@ -10,9 +11,24 @@ export default class App extends React.Component {
     store: React.PropTypes.object.isRequired
   };
 
+  getVisibleTodos(todos, filter) {
+    switch (filter) {
+      case 'SHOW_ACTIVE':
+        return todos.filter(t => !t.completed);
+      case 'SHOW_COMPLETED':
+        return todos.filter(t => t.completed);
+      case 'SHOW_ALL':
+      default:
+        return todos;
+    }
+  }
+
   render() {
     let store = this.props.store;
-    let todos = store.getState().todos;
+    let todos = this.getVisibleTodos(
+      store.getState().todos,
+      store.getState().visibilityFilter
+    );
 
     return (
       <div>
@@ -51,6 +67,21 @@ export default class App extends React.Component {
             </li>
           )}
         </ul>
+        <p>
+          Show:
+          {' '}
+          <FilterLink store={store} filter='SHOW_ALL'>
+            All
+          </FilterLink>
+          {' '}
+          <FilterLink store={store} filter='SHOW_ACTIVE'>
+            Active
+          </FilterLink>
+          {' '}
+          <FilterLink store={store} filter='SHOW_COMPLETED'>
+            Completed
+          </FilterLink>
+        </p>
       </div>
     );
   }

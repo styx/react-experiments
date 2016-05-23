@@ -4,27 +4,28 @@ import React from 'react';
 
 export default class FilterLink extends React.Component {
   static propTypes = {
-    store: React.PropTypes.object.isRequired,
+    onFilterClick: React.PropTypes.func,
+    currentFilter: React.PropTypes.string,
     filter: React.PropTypes.string.isRequired
   };
 
-  render() {
-    const { filter, store, children } = this.props;
-    const current = store.getState().visibilityFilter || 'SHOW_ALL';
+  static defaultProps = {
+    currentFilter: 'SHOW_ALL',
+    onFilterClick: () => {}
+  }
 
-    if (filter === current) {
+  render() {
+    const { filter, onFilterClick, currentFilter, children } = this.props;
+
+    if (filter === currentFilter) {
       return <span>{children}</span>;
     }
 
     return (
       <a href="#" onClick={e => {
         e.preventDefault();
-        store.dispatch({
-          type: 'SET_VISIBILITY_FILTER',
-          filter: filter
-        });
-      }}
-      >
+        onFilterClick(filter);
+      }} >
         {children}
       </a>
     );

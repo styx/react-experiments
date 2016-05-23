@@ -1,9 +1,9 @@
 'use strict';
 
 import React from 'react';
-import FilterLink from './FilterLink';
 import TodoList from './TodoList';
 import AddTodo from './AddTodo';
+import Footer from './Footer';
 
 let nextTodoId = 0;
 
@@ -40,12 +40,16 @@ export default class App extends React.Component {
     });
   }
 
+  onFilterClick(filter) {
+    this.props.store.dispatch({
+      type: 'SET_VISIBILITY_FILTER',
+      filter: filter
+    });
+  }
+
   render() {
-    let store = this.props.store;
-    let todos = this.getVisibleTodos(
-      store.getState().todos,
-      store.getState().visibilityFilter
-    );
+    let { todos, visibilityFilter } = this.props.store.getState();
+    let visibleTodos = this.getVisibleTodos(todos, visibilityFilter);
 
     return (
       <div>
@@ -53,23 +57,10 @@ export default class App extends React.Component {
 
         <AddTodo onClick={this.onAddTodo.bind(this)} />
 
-        <TodoList todos={todos} onTodoClick={this.onTodoClick.bind(this)}/>
+        <TodoList todos={visibleTodos} onTodoClick={this.onTodoClick.bind(this)}/>
 
-        <p>
-          Show:
-          {' '}
-          <FilterLink store={store} filter='SHOW_ALL'>
-            All
-          </FilterLink>
-          {', '}
-          <FilterLink store={store} filter='SHOW_ACTIVE'>
-            Active
-          </FilterLink>
-          {', '}
-          <FilterLink store={store} filter='SHOW_COMPLETED'>
-            Completed
-          </FilterLink>
-        </p>
+        <Footer currentFilter={visibilityFilter}
+          onFilterClick={this.onFilterClick.bind(this)} />
       </div>
     );
   }

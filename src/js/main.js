@@ -61,7 +61,9 @@ const render = () => {
 };
 
 const todoApp = combineReducers({todos, visibilityFilter});
-const store = createStore(todoApp);
+const store = createStore(todoApp, {},
+  window.devToolsExtension ? window.devToolsExtension() : undefined
+);
 store.subscribe(render);
 
 render();

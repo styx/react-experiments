@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import TodoList from './TodoList';
+import VisibleTodoList from './VisibleTodoList';
 import AddTodo from './AddTodo';
 import Footer from './Footer';
 
@@ -13,18 +13,6 @@ export default class App extends React.Component {
     store: React.PropTypes.object.isRequired
   };
 
-  getVisibleTodos(todos, filter) {
-    switch (filter) {
-      case 'SHOW_ACTIVE':
-        return todos.filter(t => !t.completed);
-      case 'SHOW_COMPLETED':
-        return todos.filter(t => t.completed);
-      case 'SHOW_ALL':
-      default:
-        return todos;
-    }
-  }
-
   onAddTodo(value) {
     this.props.store.dispatch({
       type: 'ADD_TODO',
@@ -33,16 +21,8 @@ export default class App extends React.Component {
     });
   }
 
-  onTodoClick(id) {
-    this.props.store.dispatch({
-      type: 'TOGGLE_TODO',
-      id: id
-    });
-  }
-
   render() {
-    let { todos, visibilityFilter } = this.props.store.getState();
-    let visibleTodos = this.getVisibleTodos(todos, visibilityFilter);
+    const { store } = this.props;
 
     return (
       <div>
@@ -50,9 +30,9 @@ export default class App extends React.Component {
 
         <AddTodo onClick={this.onAddTodo.bind(this)} />
 
-        <TodoList todos={visibleTodos} onTodoClick={this.onTodoClick.bind(this)}/>
+        <VisibleTodoList store={store} />
 
-        <Footer store={this.props.store} />
+        <Footer store={store} />
       </div>
     );
   }

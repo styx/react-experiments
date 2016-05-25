@@ -64,6 +64,8 @@ const todoApp = combineReducers({todos, visibilityFilter});
 const store = createStore(todoApp, {},
   window.devToolsExtension ? window.devToolsExtension() : undefined
 );
+
+export default store;
 store.subscribe(render);
 
 render();

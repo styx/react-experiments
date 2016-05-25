@@ -1,33 +1,42 @@
 'use strict';
 
 import React from 'react';
+import Link from './Link';
 
 export default class FilterLink extends React.Component {
   static propTypes = {
-    onFilterClick: React.PropTypes.func,
-    currentFilter: React.PropTypes.string,
+    store: React.PropTypes.object.isRequired,
     filter: React.PropTypes.string.isRequired
   };
 
-  static defaultProps = {
-    currentFilter: 'SHOW_ALL',
-    onFilterClick: () => {}
+  componentDidMount() {
+    this.unsubscribe = this.props.store.subscribe(() =>
+      this.forceUpdate()
+    );
+  }
+
+  componentWillUnMount() {
+    this.unsubscribe();
+  }
+
+  onClick() {
+    this.props.store.dispatch({
+      type: 'SET_VISIBILITY_FILTER',
+      filter: this.props.filter
+    })
   }
 
   render() {
-    const { filter, onFilterClick, currentFilter, children } = this.props;
-
-    if (filter === currentFilter) {
-      return <span>{children}</span>;
-    }
+    const { filter, store, children } = this.props;
+    const state = store.getState();
 
     return (
-      <a href="#" onClick={e => {
-        e.preventDefault();
-        onFilterClick(filter);
-      }} >
+      <Link
+        active={filter === state.visibilityFilter}
+        onClick={this.onClick.bind(this)}
+      >
         {children}
-      </a>
+      </Link>
     );
   }
 }

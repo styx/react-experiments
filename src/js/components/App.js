@@ -40,13 +40,6 @@ export default class App extends React.Component {
     });
   }
 
-  onFilterClick(filter) {
-    this.props.store.dispatch({
-      type: 'SET_VISIBILITY_FILTER',
-      filter: filter
-    });
-  }
-
   render() {
     let { todos, visibilityFilter } = this.props.store.getState();
     let visibleTodos = this.getVisibleTodos(todos, visibilityFilter);
@@ -59,8 +52,7 @@ export default class App extends React.Component {
 
         <TodoList todos={visibleTodos} onTodoClick={this.onTodoClick.bind(this)}/>
 
-        <Footer currentFilter={visibilityFilter}
-          onFilterClick={this.onFilterClick.bind(this)} />
+        <Footer store={this.props.store} />
       </div>
     );
   }

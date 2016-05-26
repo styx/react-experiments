@@ -2,13 +2,15 @@
 
 import React from 'react';
 
-export default class AddTodo extends React.Component {
-  static propTypes = {
-    onClick: React.PropTypes.func
-  };
+let nextTodoId = 0;
 
-  static defaultProps = {
-    onClick: () => {}
+export default class AddTodo extends React.Component {
+  onClick(value) {
+    this.props.store.dispatch({
+      type: 'ADD_TODO',
+      text: value,
+      id: nextTodoId++
+    });
   }
 
   render() {
@@ -21,7 +23,7 @@ export default class AddTodo extends React.Component {
           input = node;
         }} />
         <button onClick={() => {
-          onClick(input.value);
+          this.onClick(input.value);
           input.value = '';
         }}>
           Add Todo

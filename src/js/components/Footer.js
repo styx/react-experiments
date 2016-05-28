@@ -5,20 +5,19 @@ import FilterLink from './FilterLink';
 
 export default class Footer extends React.Component {
   render() {
-    const { store } = this.props;
     return (
       <p>
         Show:
         {' '}
-        <FilterLink filter='SHOW_ALL' store={store}>
+        <FilterLink filter='SHOW_ALL'>
           All
         </FilterLink>
         {', '}
-        <FilterLink filter='SHOW_ACTIVE' store={store}>
+        <FilterLink filter='SHOW_ACTIVE'>
           Active
         </FilterLink>
         {', '}
-        <FilterLink filter='SHOW_COMPLETED' store={store}>
+        <FilterLink filter='SHOW_COMPLETED'>
           Completed
         </FilterLink>
       </p>

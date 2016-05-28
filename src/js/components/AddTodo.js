@@ -5,8 +5,12 @@ import React from 'react';
 let nextTodoId = 0;
 
 export default class AddTodo extends React.Component {
+  static contextTypes = {
+    store: React.PropTypes.object.isRequired
+  }
+
   onClick(value) {
-    this.props.store.dispatch({
+    this.context.store.dispatch({
       type: 'ADD_TODO',
       text: value,
       id: nextTodoId++

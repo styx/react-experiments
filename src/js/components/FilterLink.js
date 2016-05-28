@@ -5,12 +5,15 @@ import Link from './Link';
 
 export default class FilterLink extends React.Component {
   static propTypes = {
-    store: React.PropTypes.object.isRequired,
     filter: React.PropTypes.string.isRequired
   };
 
+  static contextTypes = {
+    store: React.PropTypes.object.isRequired
+  }
+
   componentDidMount() {
-    this.unsubscribe = this.props.store.subscribe(() =>
+    this.unsubscribe = this.context.store.subscribe(() =>
       this.forceUpdate()
     );
   }
@@ -20,19 +23,19 @@ export default class FilterLink extends React.Component {
   }
 
   onClick() {
-    this.props.store.dispatch({
+    this.context.store.dispatch({
       type: 'SET_VISIBILITY_FILTER',
       filter: this.props.filter
     })
   }
 
   render() {
-    const { filter, store, children } = this.props;
-    const state = store.getState();
+    const { visibilityFilter } = this.context.store.getState();
+    const { filter, children } = this.props;
 
     return (
       <Link
-        active={filter === state.visibilityFilter}
+        active={filter === visibilityFilter}
         onClick={this.onClick.bind(this)}
       >
         {children}

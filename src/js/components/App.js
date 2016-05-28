@@ -17,11 +17,11 @@ export default class App extends React.Component {
       <div>
         <h1>Hello Redux</h1>
 
-        <AddTodo store={store} />
+        <AddTodo />
 
-        <VisibleTodoList store={store} />
+        <VisibleTodoList />
 
-        <Footer store={store} />
+        <Footer />
       </div>
     );
   }

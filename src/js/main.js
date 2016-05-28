@@ -3,9 +3,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { combineReducers, createStore } from 'redux';
+import { Provider } from 'react-redux';
 
 import App from './components/App';
-import Provider from './components/Provider';
 
 const todo = (state, action) => {
   switch (action.type) {

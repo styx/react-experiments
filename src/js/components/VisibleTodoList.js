@@ -4,12 +4,12 @@ import React from 'react';
 import TodoList from './TodoList';
 
 export default class VisibleTodoList extends React.Component {
-  static propTypes = {
-    store: React.PropTypes.object.isRequired,
+  static contextTypes = {
+    store: React.PropTypes.object.isRequired
   }
 
   componentDidMount() {
-    this.unsubscribe = this.props.store.subscribe(() =>
+    this.unsubscribe = this.context.store.subscribe(() =>
       this.forceUpdate()
     );
   }
@@ -31,14 +31,14 @@ export default class VisibleTodoList extends React.Component {
   }
 
   onTodoClick(id) {
-    this.props.store.dispatch({
+    this.context.store.dispatch({
       type: 'TOGGLE_TODO',
       id: id
     });
   }
 
   render() {
-    const { store } = this.props;
+    const { store } = this.context;
     let { todos, visibilityFilter } = store.getState();
     let visibleTodos = this.getVisibleTodos(todos, visibilityFilter);
 

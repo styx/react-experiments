@@ -1,16 +1,13 @@
 'use strict';
 
 import React from 'react';
+import { connect } from 'react-redux';
 
 let nextTodoId = 0;
 
-export default class AddTodo extends React.Component {
-  static contextTypes = {
-    store: React.PropTypes.object.isRequired
-  }
-
+class AddTodo extends React.Component {
   onClick(value) {
-    this.context.store.dispatch({
+    this.props.dispatch({
       type: 'ADD_TODO',
       text: value,
       id: nextTodoId++
@@ -36,3 +33,5 @@ export default class AddTodo extends React.Component {
     );
   }
 }
+
+export default connect()(AddTodo);

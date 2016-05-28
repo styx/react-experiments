@@ -2,16 +2,11 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-
-let nextTodoId = 0;
+import { addTodo } from '../actions/todos';
 
 class AddTodo extends React.Component {
   onClick(value) {
-    this.props.dispatch({
-      type: 'ADD_TODO',
-      text: value,
-      id: nextTodoId++
-    });
+    this.props.dispatch(addTodo(value));
   }
 
   render() {

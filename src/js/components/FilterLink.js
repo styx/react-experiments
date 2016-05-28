@@ -1,45 +1,27 @@
 'use strict';
 
 import React from 'react';
+import { connect } from 'react-redux';
+
 import Link from './Link';
 
-export default class FilterLink extends React.Component {
-  static propTypes = {
-    filter: React.PropTypes.string.isRequired
-  };
-
-  static contextTypes = {
-    store: React.PropTypes.object.isRequired
+const mapStateToProps = (state, props) => {
+  return {
+    active:
+      props.filter ===
+      state.visibilityFilter
   }
+};
 
-  componentDidMount() {
-    this.unsubscribe = this.context.store.subscribe(() =>
-      this.forceUpdate()
-    );
+const mapDispatchToProps = (dispatch, props) => {
+  return {
+    onClick: () => {
+      dispatch({
+        type: 'SET_VISIBILITY_FILTER',
+        filter: props.filter
+      })
+    }
   }
+};
 
-  componentWillUnMount() {
-    this.unsubscribe();
-  }
-
-  onClick() {
-    this.context.store.dispatch({
-      type: 'SET_VISIBILITY_FILTER',
-      filter: this.props.filter
-    })
-  }
-
-  render() {
-    const { visibilityFilter } = this.context.store.getState();
-    const { filter, children } = this.props;
-
-    return (
-      <Link
-        active={filter === visibilityFilter}
-        onClick={this.onClick.bind(this)}
-      >
-        {children}
-      </Link>
-    );
-  }
-}
+export default connect(mapStateToProps, mapDispatchToProps)(Link);

@@ -6,13 +6,12 @@ import AddTodo from './AddTodo';
 import Footer from './Footer';
 
 export default class App extends React.Component {
-
-  static propTypes = {
+  static contextTypes = {
     store: React.PropTypes.object.isRequired
-  };
+  }
 
   render() {
-    const { store } = this.props;
+    const { store } = this.context;
 
     return (
       <div>

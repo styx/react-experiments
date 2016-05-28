@@ -4,7 +4,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { combineReducers, createStore } from 'redux';
 
-import App from './components/app';
+import App from './components/App';
+import Provider from './components/Provider';
 
 const todo = (state, action) => {
   switch (action.type) {
@@ -53,9 +54,9 @@ const visibilityFilter = (state = 'SHOW_ALL', action) => {
 
 const render = () => {
   ReactDOM.render(
-    <App
-      store={store}
-    />,
+    <Provider store={store}>
+      <App />
+    </Provider>,
     document.getElementById('main')
   );
 };
@@ -65,7 +66,6 @@ const store = createStore(todoApp, {},
   window.devToolsExtension ? window.devToolsExtension() : undefined
 );
 
-export default store;
 store.subscribe(render);
 
 render();

@@ -4,6 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { combineReducers, createStore } from 'redux';
 import { Provider } from 'react-redux';
+import { loadState, saveState } from './utils/localStorage';
 
 import App from './components/App';
 
@@ -62,10 +63,13 @@ const render = () => {
 };
 
 const todoApp = combineReducers({todos, visibilityFilter});
-const store = createStore(todoApp, {},
+const store = createStore(todoApp, loadState(),
   window.devToolsExtension ? window.devToolsExtension() : undefined
 );
 
 store.subscribe(render);
+store.subscribe(() => {
+  saveState(store.getState());
+});
 
 render();

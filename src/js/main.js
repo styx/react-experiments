@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom';
 import { combineReducers, createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { loadState, saveState } from './utils/localStorage';
+import throttle from 'lodash/throttle';
 
 import App from './components/App';
 
@@ -68,10 +69,10 @@ const store = createStore(todoApp, loadState(),
 );
 
 store.subscribe(render);
-store.subscribe(() => {
+store.subscribe(throttle(() => {
   saveState({
     todos: store.getState().todos
   });
-});
+}, 1000));
 
 render();

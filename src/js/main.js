@@ -69,7 +69,9 @@ const store = createStore(todoApp, loadState(),
 
 store.subscribe(render);
 store.subscribe(() => {
-  saveState(store.getState());
+  saveState({
+    todos: store.getState().todos
+  });
 });
 
 render();

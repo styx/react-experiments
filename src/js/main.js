@@ -2,16 +2,12 @@
 
 import React from 'react';
 import { render } from 'react-dom';
-import { Provider } from 'react-redux';
 import configureStore from './utils/configureStore.js';
-
-import App from './components/App';
+import Root from './components/Root'
 
 const store = configureStore();
 
 render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
+  <Root store={store} />,
   document.getElementById('main')
 );

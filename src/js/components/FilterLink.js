@@ -1,24 +1,22 @@
 'use strict';
 
 import React from 'react';
-import { connect } from 'react-redux';
-import { setVisibilityFilter } from '../actions/todos';
-import Link from './Link';
+import { Link } from 'react-router';
 
-const mapStateToProps = (state, props) => {
-  return {
-    active:
-      props.filter ===
-      state.visibilityFilter
+export default class FilterLink extends React.Component {
+  render() {
+    const { filter, children } = this.props;
+
+    return (
+      <Link
+        to={filter==='all' ? '' : filter}
+        activeStyle={{
+          textDecoration: 'none',
+          color: 'black'
+        }}
+      >
+        {children}
+      </Link>
+    );
   }
-};
-
-const mapDispatchToProps = (dispatch, props) => {
-  return {
-    onClick: () => {
-      dispatch(setVisibilityFilter(props.filter))
-    }
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Link);
+}

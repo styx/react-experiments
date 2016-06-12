@@ -19,7 +19,7 @@ export default class App extends React.Component {
 
         <AddTodo />
 
-        <VisibleTodoList />
+        <VisibleTodoList filter={this.props.params.filter || 'all'}/>
 
         <Footer />
       </div>

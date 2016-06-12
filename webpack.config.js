@@ -7,7 +7,11 @@ module.exports = {
   },
   devServer: {
     inline: true,
-    contentBase: './dist'
+    contentBase: './dist',
+    historyApiFallback: {
+      index: 'index.html'
+    },
+    port: 9000
   },
   module: {
     loaders: [

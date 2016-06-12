@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react';
+import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { toggleTodo } from '../actions/todos';
 import TodoList from './TodoList';
@@ -17,14 +18,9 @@ const getVisibleTodos = (todos, filter) => {
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
-  return {
-    todos: getVisibleTodos(
-      state.todos,
-      ownProps.filter
-    )
-  };
-}
+const mapStateToProps = (state, { params }) => ({
+  todos: getVisibleTodos(state.todos, params.filter || 'all')
+});
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -34,4 +30,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TodoList);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(TodoList));

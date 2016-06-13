@@ -36,4 +36,16 @@ const todos = (state = [], action) => {
   }
 };
 
+export const getVisibleTodos = ({ todos }, filter) => {
+  switch (filter) {
+    case 'active':
+      return todos.filter(t => !t.completed);
+    case 'completed':
+      return todos.filter(t => t.completed);
+    case 'all':
+    default:
+      return todos;
+  }
+}
+
 export const todoApp = combineReducers({todos});

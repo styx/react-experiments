@@ -2,23 +2,13 @@ import * as types from '../constants/ActionTypes';
 import { v4 as nextTodoId } from 'node-uuid';
 import * as api from '../api';
 
-export const addTodo = (text) => {
-  return {
-    type: types.ADD_TODO,
-    id: nextTodoId(),
-    text
-  };
-};
-
-export const toggleTodo = (id) => {
-  return {
-    type: types.TOGGLE_TODO,
-    id
-  };
-};
+export const requestTodos = (filter) => ({
+  type: types.REQUEST_TODOS,
+  filter
+});
 
 const receiveTodos = (filter, response) => ({
-  type: 'RECEIVE_TODOS',
+  type: types.RECEIVE_TODOS,
   filter,
   response
 });

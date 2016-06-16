@@ -24,7 +24,7 @@ const createList = (filter) => {
       default:
         return state;
     }
-  }
+  };
 
   return combineReducers({
     ids,

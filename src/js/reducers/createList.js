@@ -1,11 +1,13 @@
 import { combineReducers } from 'redux';
+import * as types from '../constants/ActionTypes';
+
 const createList = (filter) => {
   const ids = (state = [], action) => {
     if (action.filter !== filter) {
       return state;
     }
     switch (action.type) {
-      case 'RECEIVE_TODOS':
+      case types.FETCH_TODOS_SUCCESS:
         return action.response.map(todo => todo.id);
       default:
         return state;
@@ -17,9 +19,10 @@ const createList = (filter) => {
       return state;
     }
     switch (action.type) {
-      case 'REQUEST_TODOS':
+      case types.FETCH_TODOS_REQUEST:
         return true;
-      case 'RECEIVE_TODOS':
+      case types.FETCH_TODOS_SUCCESS:
+      case types.FETCH_TODOS_FAILURE:
         return false;
       default:
         return state;

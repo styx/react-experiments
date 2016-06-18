@@ -23,9 +23,10 @@ const delay = (ms) =>
 
 export const fetchTodos = (filter) =>
   delay(500).then(() => {
-    if (Math.random() > 0.5) {
-      throw new Error('Boom!');
-    }
+    // For error handling testing
+    // if (Math.random() > 0.5) {
+    //   throw new Error('Boom!');
+    // }
 
     switch (filter) {
       case 'all':
@@ -42,7 +43,7 @@ export const fetchTodos = (filter) =>
 export const addTodo = (text) =>
   delay(500).then(() => {
     const todo = {
-      id: nextTodoId,
+      id: nextTodoId(),
       text,
       completed: false
     };

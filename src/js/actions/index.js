@@ -1,5 +1,4 @@
 import * as types from '../constants/ActionTypes';
-import { v4 as nextTodoId } from 'node-uuid';
 import { getIsFetching } from '../reducers';
 import * as api from '../api';
 
@@ -10,7 +9,7 @@ export const fetchTodos = (filter) => (dispatch, getState) => {
 
   dispatch({
     type: types.FETCH_TODOS_REQUEST,
-    filter
+    filter,
   });
 
   return api.fetchTodos(filter).then(
@@ -18,15 +17,23 @@ export const fetchTodos = (filter) => (dispatch, getState) => {
       dispatch({
         type: types.FETCH_TODOS_SUCCESS,
         filter,
-        response
+        response,
       });
     },
     error => {
       dispatch({
         type: types.FETCH_TODOS_FAILURE,
         filter,
-        message: error.message || 'Something wrong.'
+        message: error.message || 'Something wrong.',
       });
     }
   );
 };
+
+export const addTodo = (text) => (dispatch) =>
+  api.addTodo(text).then(response => {
+    dispatch({
+      type: types.ADD_TODO_SUCCESS,
+      response,
+    });
+  });

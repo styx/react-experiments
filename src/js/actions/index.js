@@ -1,5 +1,7 @@
 import * as types from '../constants/ActionTypes';
 import { getIsFetching } from '../reducers';
+import { normalize } from 'normalizr';
+import * as schema from './schema';
 import * as api from '../api';
 
 export const fetchTodos = (filter) => (dispatch, getState) => {
@@ -17,7 +19,7 @@ export const fetchTodos = (filter) => (dispatch, getState) => {
       dispatch({
         type: types.FETCH_TODOS_SUCCESS,
         filter,
-        response,
+        response: normalize(response, schema.arrayOfTodos),
       });
     },
     error => {
@@ -34,6 +36,6 @@ export const addTodo = (text) => (dispatch) =>
   api.addTodo(text).then(response => {
     dispatch({
       type: types.ADD_TODO_SUCCESS,
-      response,
+      response: normalize(response, schema.todo),
     });
   });

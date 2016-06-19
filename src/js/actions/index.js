@@ -39,3 +39,11 @@ export const addTodo = (text) => (dispatch) =>
       response: normalize(response, schema.todo),
     });
   });
+
+export const toggleTodo = (id) => (dispatch) =>
+  api.toggleTodo(id).then(response => {
+    dispatch({
+      type: types.TOGGLE_TODO_SUCCESS,
+      response: normalize(response, schema.todo),
+    })
+  })

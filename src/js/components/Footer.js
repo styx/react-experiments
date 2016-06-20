@@ -9,11 +9,11 @@ export default class Footer extends React.Component {
       <p>
         Show:
         {' '}
-        <FilterLink filter='all'>
+        <FilterLink filter="all">
           All
         </FilterLink>
         {', '}
-        <FilterLink filter='active'>
+        <FilterLink filter="active">
           Active
         </FilterLink>
         {', '}

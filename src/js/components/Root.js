@@ -6,9 +6,13 @@ import App from './App';
 const Root = ({ store }) => (
   <Provider store={store}>
     <Router history={browserHistory} >
-      <Route path='/(:filter)' component={App} />
+      <Route path="/(:filter)" component={App} />
     </Router>
   </Provider>
 );
+
+Root.propTypes = {
+  store: React.PropTypes.object.isRequired,
+};
 
 export default Root;

@@ -3,15 +3,15 @@ module.exports = {
   output: {
     path: './dist',
     filename: 'bundle.js',
-    publicPath: '/'
+    publicPath: '/',
   },
   devServer: {
     inline: true,
     contentBase: './dist',
     historyApiFallback: {
-      index: 'index.html'
+      index: 'index.html',
     },
-    port: 9000
+    port: 9000,
   },
   module: {
     loaders: [
@@ -21,9 +21,9 @@ module.exports = {
         loader: 'babel',
         query: {
           plugins: ['transform-class-properties'],
-          presets: ['es2017', 'react']
-        }
-      }
-    ]
-  }
-}
+          presets: ['es2017', 'react'],
+        },
+      },
+    ],
+  },
+};

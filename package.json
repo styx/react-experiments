@@ -4,7 +4,8 @@
   "description": "Redux learning",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server"
+    "start": "webpack-dev-server",
+    "lint": "./node_modules/eslint/bin/eslint.js ./"
   },
   "author": "Mikhail Pabalavets",
   "license": "ISC",
@@ -21,6 +22,7 @@
   },
   "devDependencies": {
     "babel-core": "^6.9.1",
+    "babel-eslint": "^6.0.4",
     "babel-loader": "^6.2.4",
     "babel-plugin-transform-class-properties": "^6.9.1",
     "babel-preset-es2017": "^1.4.0",

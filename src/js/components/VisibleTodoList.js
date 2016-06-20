@@ -1,6 +1,4 @@
-'use strict';
-
-import React, { Component } from 'react';
+import React from 'react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
@@ -9,11 +7,20 @@ import TodoList from './TodoList';
 import FetchError from './FetchError';
 
 class VisibleTodoList extends React.Component {
+  static propTypes = {
+    filter: React.PropTypes.string,
+    fetchTodos: React.PropTypes.func.isRequired,
+    toggleTodo: React.PropTypes.func.isRequired,
+    errorMessage: React.PropTypes.string,
+    todos: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
+    isFetching: React.PropTypes.bool.isRequired,
+  };
+
   componentDidMount() {
     this.fetchData();
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps) {
     if (this.props.filter !== prevProps.filter) {
       this.fetchData();
     }
@@ -57,7 +64,7 @@ const mapStateToProps = (state, { params }) => {
     todos: getVisibleTodos(state, filter),
     isFetching: getIsFetching(state, filter),
     errorMessage: getErrorMessage(state, filter),
-    filter: filter
+    filter,
   };
 };
 

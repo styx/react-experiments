@@ -65,7 +65,7 @@ const createList = (filter) => {
   return combineReducers({
     ids,
     isFetching,
-    errorMessage
+    errorMessage,
   });
 };
 

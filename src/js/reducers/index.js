@@ -5,12 +5,12 @@ import createList, * as fromList from './createList';
 const listByFilter = combineReducers({
   all: createList('all'),
   active: createList('active'),
-  completed: createList('completed')
+  completed: createList('completed'),
 });
 
 const todos = combineReducers({
   byId,
-  listByFilter
+  listByFilter,
 });
 
 export default todos;

@@ -1,5 +1,3 @@
-import * as types from '../constants/ActionTypes';
-
 const byId = (state = {}, action) => {
   if (action.response) {
     return {

@@ -15,7 +15,7 @@ const fakeDatabase = {
     id: nextTodoId(),
     text: 'Test 3',
     completed: false,
-  }]
+  }],
 };
 
 const delay = (ms) =>
@@ -45,7 +45,7 @@ export const addTodo = (text) =>
     const todo = {
       id: nextTodoId(),
       text,
-      completed: false
+      completed: false,
     };
 
     fakeDatabase.todos.push(todo);

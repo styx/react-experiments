@@ -9,4 +9,9 @@ const FetchError = ({ message, onRetry }) => (
   </div>
 );
 
+FetchError.propTypes = {
+  message: React.PropTypes.string.isRequired,
+  onRetry: React.PropTypes.func.isRequired,
+};
+
 export default FetchError;

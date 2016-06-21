@@ -1,28 +1,16 @@
-'use strict';
-
 import React from 'react';
 import VisibleTodoList from './VisibleTodoList';
 import AddTodo from './AddTodo';
 import Footer from './Footer';
 
-export default class App extends React.Component {
-  static contextTypes = {
-    store: React.PropTypes.object.isRequired
-  }
+const App = () => (
+  <div>
+    <h1>Hello Redux</h1>
 
-  render() {
-    const { store } = this.context;
+    <AddTodo />
+    <VisibleTodoList />
+    <Footer />
+  </div>
+);
 
-    return (
-      <div>
-        <h1>Hello Redux</h1>
-
-        <AddTodo />
-
-        <VisibleTodoList />
-
-        <Footer />
-      </div>
-    );
-  }
-}
+export default App;

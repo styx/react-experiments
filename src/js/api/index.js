@@ -58,3 +58,11 @@ export const toggleTodo = (id) =>
     todo.completed = !todo.completed;
     return todo;
   });
+
+export const destroyTodo = (id, filter) =>
+  delay(500).then(() => {
+    fakeDatabase.todos =
+      fakeDatabase.todos.filter(t => t.id !== id);
+
+    return fetchTodos(filter);
+  });

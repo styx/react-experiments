@@ -47,3 +47,11 @@ export const toggleTodo = (id) => (dispatch) =>
       response: normalize(response, schema.todo),
     });
   });
+
+export const destroyTodo = (id) => (dispatch) =>
+  api.destroyTodo(id).then(response => {
+    dispatch({
+      type: types.DESTROY_TODO_SUCCESS,
+      response: normalize(response, schema.todos),
+    });
+  });

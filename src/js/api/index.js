@@ -61,8 +61,7 @@ export const toggleTodo = (id) =>
 
 export const destroyTodo = (id, filter) =>
   delay(500).then(() => {
-    fakeDatabase.todos =
-      fakeDatabase.todos.filter(t => t.id !== id);
-
-    return fetchTodos(filter);
+    const todo = fakeDatabase.todos.find(t => t.id === id);
+    fakeDatabase.todos = fakeDatabase.todos.filter(t => t.id !== id);
+    return todo;
   });

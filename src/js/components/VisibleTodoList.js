@@ -11,6 +11,7 @@ class VisibleTodoList extends React.Component {
     filter: React.PropTypes.string,
     fetchTodos: React.PropTypes.func.isRequired,
     toggleTodo: React.PropTypes.func.isRequired,
+    destroyTodo: React.PropTypes.func.isRequired,
     errorMessage: React.PropTypes.string,
     todos: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
     isFetching: React.PropTypes.bool.isRequired,
@@ -32,7 +33,7 @@ class VisibleTodoList extends React.Component {
   }
 
   render() {
-    const { toggleTodo, errorMessage, todos, isFetching } = this.props;
+    const { toggleTodo, destroyTodo, errorMessage, todos, isFetching } = this.props;
 
     if (isFetching && !todos.length) {
       return (
@@ -53,6 +54,7 @@ class VisibleTodoList extends React.Component {
       <TodoList
         todos={todos}
         onTodoClick={toggleTodo}
+        onDestroyClick={destroyTodo}
       />
     );
   }

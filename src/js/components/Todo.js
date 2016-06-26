@@ -4,7 +4,8 @@ export default class Todo extends React.Component {
   static propTypes = {
     completed: React.PropTypes.bool,
     text: React.PropTypes.string.isRequired,
-    onClick: React.PropTypes.func,
+    onToggle: React.PropTypes.func,
+    onDestroy: React.PropTypes.func,
   };
 
   static defaultProps = {
@@ -13,11 +14,10 @@ export default class Todo extends React.Component {
   }
 
   render() {
-    const { completed, text, onClick } = this.props;
+    const { completed, text, onToggle, onDestroy } = this.props;
 
     return (
       <li
-        onClick={onClick}
         style={{
           textDecoration:
             completed ?
@@ -25,7 +25,8 @@ export default class Todo extends React.Component {
               'none',
         }}
       >
-        {text}
+        <span onClick={onToggle}>{text}</span>
+        <a onClick={onDestroy}>[X]</a>
       </li>
     );
   }

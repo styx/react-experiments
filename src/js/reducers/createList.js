@@ -27,6 +27,8 @@ const createList = (filter) => {
           state;
       case types.TOGGLE_TODO_SUCCESS:
         return handleToggle(state, action);
+      case types.DESTROY_TODO_SUCCESS:
+        return state.filter(id => id !== action.response.result);
       default:
         return state;
     }
